@@ -1,4 +1,4 @@
-# Jason
+# training
 
 Code in folder Leetcode is my answers for the questions on the online judge.
 It's daily training. Gratitude for the oj.
