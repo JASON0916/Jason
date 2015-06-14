@@ -1,31 +1,28 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
-__author__ = 'phoenix'
+def sub_sort(array,low,high):
+    key = array[low]
+    while low < high:
+        while low < high and array[high] >= key:
+            high -= 1
+        while low < high and array[high] < key:
+            array[low] = array[high]
+            low += 1
+            array[high] = array[low]
+    array[low] = key
+    return low
 
 
-def partition(part_list, start, end):
-    i = start - 1
-    pivot = part_list[end]
-    for j in range(start, end-1):
-        if part_list[j] < pivot:
-            i += 1
-            part_list[j], part_list[i] = part_list[i], part_list[j]
-    part_list[i+1], part_list[end] = part_list[end], part_list[i+1]
-    return i+1
+def quick_sort(array,low,high):
+     if low < high:
+        key_index = sub_sort(array,low,high)
+        quick_sort(array,low,key_index)
+        quick_sort(array,key_index+1,high)
 
 
-def quick_sort(unsorted_list, start, end):
-    if start < end:
-        p = partition(unsorted_list, start, end)
-        quick_sort(unsorted_list, start, p-1)
-        quick_sort(unsorted_list, p+1, end)
-    else:
-        return
-
-if __name__ == "__main__":
-    import time
-    start = time.clock()
-    array = [2, 4, 32, 64, 34, 78, 23, 2345, 2345, 12, 1, 3]
-    quick_sort(array, 0, len(array)-1)
-    stop = time.clock()
+if __name__ == '__main__':
+    array = [8,10,9,6,4,16,5,13,26,18,2,45,34,23,1,7,3]
     print(array)
-    print("total time used %(times)f" % {"times": stop-start})
+    quick_sort(array,0,len(array)-1)
+    print(array)
